@@ -14,3 +14,13 @@ I would like this script to be as simple as I can. I don't know when could I fin
 
 为了能够让更多的零基础的人进行使用，我会将代码书写的尽可能简洁。
 
+# 使用说明
+
+## 使用依赖
+
+本脚本中使用的库包括json，pillow和pdf2image等。linux用户可以通过pip install或者conda install的方式安装上述库。
+在安装pdf2image之前，请安装sudo apt install poppler-utils。更为具体的安装须知请参考https://github.com/Belval/pdf2image 。
+
+对于windows用户而言，推荐使用anaconda进行库的安装。windows环境下的poppler的安装也请参考https://github.com/Belval/pdf2image 。
+
+## pipeline说明
