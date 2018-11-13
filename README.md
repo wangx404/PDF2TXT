@@ -18,13 +18,19 @@ For windows user, anaconda is recommended to install these packages. And to inst
 convert PDF to images-> rename images-> crop out useless margin in image -> invoke ocr api to convert image to json -> convert json file to txt file -> concatenate txt file into a bigger txt file
 
 ## Variable Setting
+
 Before using this script, you should also set some variables.
+
 app_id&app_key：app id and app key for tencent general ocr api. Apply for related development permission is ai.qq.com .
 image_dir/json_dir/txt_dir: Folders to save temporary image filess, json files and txt files. In default, You can ignore this.
+
 pdf_file: Pdf file needed to be converted. to save it in the save directory with the script.
+
 crop_area: Crop location. In some scanned version pdf, you may see watermark, header or footer in the paper. They will generate some noise in the process to convert image to json. To avoid this, you should set this variable to crop the margin.
 The crop location is in the form of (xmin, ymin, xmax, ymax), which is left top x axis, left top y axis, right down x axis, right down y axis.
+
 method: When convrting a json file to txt file, we need to confirm if two adjacent lines belong to the same paragraph. If the paragraph in the pdf file has indentation, you should choose the 'space' method; or else you should chooose the 'interval' method, which means the script will use intervals between two lines to confirm.
+
 platform: The platform you are using. It is used to confirm the return character after each paragraph.You can chooose linux, windows or mac.
 
 # 使用说明
