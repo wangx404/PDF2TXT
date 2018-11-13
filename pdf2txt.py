@@ -98,9 +98,13 @@ def image2json(image_file, json_dir):
         return
     ai_obj = apiutil.AiPlat(app_id, app_key)
     rsp = ai_obj.getOcrGeneralocr(image_file)
+    if rsp['ret'] == 16447: # 通用OCR识别错误
+        print('No character in image %s' % image_file)
+        return
     with open(json_file, 'w') as f:
         json.dump(rsp, f)
     print('Image %s has been converted to json.' % image_file)
+
 
 def images2jsons(image_dir, json_dir):
     '''
@@ -173,7 +177,7 @@ def calcAverageIntervalHeight(new_content):
     for up_line, down_line in zip(new_content[:-1], new_content[1:]):
         intervals.append(abs(down_line[2] - up_line[2]))
     intervals.sort()
-    half_length = len(intervals) // 2
+    half_length = len(intervals) // 2 if len(intervals) > 1 else 1
     average_interval = sum(intervals[:half_length]) / half_length
     return average_interval
 
@@ -278,7 +282,7 @@ def replaceCharsInString(string):
     eng_punctuation = [':', '?', '!', '(', ')', ';']
     chn_punctuation = ['：', '？', '！', '（', '）', '；']
     for eng, chn in zip(eng_punctuation, chn_punctuation):
-        string = string.relace(eng, chn)
+        string = string.replace(eng, chn)
     return string
 
 
@@ -302,9 +306,16 @@ def json2txt(json_file, txt_dir, method, platform):
     :param platform: 脚本调用的操作系统（windows/linux/mac），决定写文本时行尾添加\r\n/\n/\r
     :return None:
     '''
+    # 跳过处理
+    json_file_prefix = os.path.split(json_file)[1]
+    json_file_prefix = json_file_prefix.split('.')[0]
+    txt_file = os.path.join(txt_dir, '%s.txt' % json_file_prefix)
+    if os.path.exists(txt_file):
+        return
+     # 加载并转换json文件的格式
     with open(json_file, 'r') as f:
         content = json.load(f)
-    content = transformFormat(content) # 加载并转换json文件的格式
+    content = transformFormat(content)
     # 计算相关属性参数
     char_width = calcAverageCharWidth(content)
     #char_height = calcAverageCharHeight(content)
@@ -333,9 +344,6 @@ def json2txt(json_file, txt_dir, method, platform):
     else:
         print("You should choose the platform in ('windows', 'linux', 'mac').")
     # 写入文件
-    json_file_prefix = os.path.split(json_file)[1]
-    json_file_prefix = json_file_prefix.split('.')[0]
-    txt_file = os.path.join(txt_dir, '%s.txt' % json_file_prefix)
     with open(txt_file, 'w') as f:
         f.writelines(content)
     print('Json file %s has been converted to txt file.' % json_file)
@@ -353,7 +361,7 @@ def jsons2txts(json_dir, txt_dir, method, platform):
     json_list = os.listdir(json_dir)
     json_list.sort()
     for json_file in json_list:
-        json_file = os.path.join(json_dir, json)
+        json_file = os.path.join(json_dir, json_file)
         try:
             json2txt(json_file, txt_dir, method, platform)
         except Exception as e:
@@ -369,7 +377,7 @@ def readTXT(txt):
     '''
     with open(txt, 'r') as f:
         lines = f.readlines()
-    lines = [line.strip() for line in lines]
+    lines = [line.strip('\r\n') for line in lines] # 只消除尾部的换行符
     return lines
 
        
@@ -484,7 +492,7 @@ def saveContent(txt_dir, pdf_file, method, platform):
         print("You should choose the platform in ('windows', 'linux', 'mac').")
     # 保存文本
     txt = pdf_file.split('.')[0] + '.txt'
-    with open(txt, 'r') as f:
+    with open(txt, 'w') as f:
         f.writelines(contents)
     print('Congratulation, the PDF is converted to TXT!')
 
