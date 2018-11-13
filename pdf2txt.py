@@ -91,7 +91,7 @@ def image2json(image_file, json_dir):
     :return None:
     '''
     # 获取对应的json文件名，并跳过已转换的图片
-    json_file = os.path.split(image_file)[0]
+    json_file = os.path.split(image_file)[1]
     json_file = json_file.split('.')[0] + '.json'
     json_file = os.path.join(json_dir, json_file)
     if os.path.exists(json_file):
