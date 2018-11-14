@@ -17,7 +17,7 @@ pdf_file = 'xxx.pdf' # 当前文件夹中待处理的PDF文件名
 '''
 crop_area = (100, 200, 1200, 1900) # 剪裁区域坐标
 method = 'space' # 选择文本重组的方法，使用空格'space'或者行间距'interval'进行
-platform = 'linux' # 选择操作系统的类别，请填入'linux'或者'windows'
+platform = 'linux' # 选择操作系统的类别，请填入'linux'、'windows'或者'mac'
 
 
 def makeDirs(image_dir, json_dir, txt_dir):
