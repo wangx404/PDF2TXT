@@ -39,7 +39,7 @@ The crop location is in the form of (xmin, ymin, xmax, ymax), which is left top 
 
 As shown in the picture below, before ocr you need to crop out the area outside the red line. The area within the the red line is actually what we need. Using software to get the x/y axis value, you will get the value of variable crop_area.
 
-<center>![demonstration](how_to_crop.png)</center>
+<center> ![demonstration](how_to_crop.png) </center>
 
 # 使用说明
 ## 中文背景说明
@@ -81,4 +81,4 @@ PDF解析成图片-> 图片重命名-> 剪裁掉图片边缘-> 调用OCR识别AP
 
 如下图所示，你需要将正文的内容从PDF扫描页中剪裁出来；红框中的区域才是我们所需要的。通过相关软件确认了左上角和右下角的坐标点后即可得到crop_area参数。
 
-<center>![剪裁示意图](how_to_crop.png)</center>
+<center> ![剪裁示意图](how_to_crop.png) </center>
