@@ -11,10 +11,6 @@ image_dir = 'images' # 图像缓存文件夹
 json_dir = 'jsons' # json缓存文件夹
 txt_dir = 'txts' # txt缓存文件夹
 pdf_file = 'xxx.pdf' # 当前文件夹中待处理的PDF文件名
-'''
-由于某些扫描版本的pdf中存在额外添加的水印， 为消除此水印以及页眉页脚带来的噪音干扰，请设定剪裁区域。
-剪裁区域的坐标分别为(左上角x轴数值，左上角y轴数值，右下角x轴数值，右下角y轴数值。)
-'''
 crop_area = (100, 200, 1200, 1900) # 剪裁区域坐标
 method = 'space' # 选择文本重组的方法，使用空格'space'或者行间距'interval'进行
 platform = 'linux' # 选择操作系统的类别，请填入'linux'、'windows'或者'mac'
