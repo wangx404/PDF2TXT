@@ -41,6 +41,11 @@ As shown in the picture below, before ocr you need to crop out the area outside 
 
 ![demonstration](how_to_crop.png)
 
+
+## Running
+
+After finish setting the variables, you can simplely type `python pdf2txt.py` in the command line to run this script. During the pdf2image stage, the script may consume quite a lot momery; and in the stage of ocr, you need to wait patiently as the speed limitation of ocr api (up to 1 invoke per second). Anyway when the script is done, you could find the txt file in cuurent directory with the prefix of pdf file.
+
 # 使用说明
 ## 中文背景说明
 
@@ -81,4 +86,9 @@ PDF解析成图片-> 图片重命名-> 剪裁掉图片边缘-> 调用OCR识别AP
 
 如下图所示，你需要将正文的内容从PDF扫描页中剪裁出来；红框中的区域才是我们所需要的。通过相关软件确认了左上角和右下角的坐标点后即可得到crop_area参数。
 
-                                             ![剪裁示意图](how_to_crop.png)
+![剪裁示意图](how_to_crop.png)
+
+## 运行
+
+在完成参数的设置后，你可以通过在命令行中输入`python pdf2txt.py`运行脚本。在pdf2image阶段，脚本可能会占用较多的内存；在image2json阶段由于腾讯api接口调用速度限制（非认证用户每秒一次），因此可能需要消耗10min+完成全部图片的识别。当脚本最终运行结束后，你会在当前文件夹中发现一个和PDF文件同名的TXT文件。
+
