@@ -41,7 +41,7 @@ def pdf2images(pdf_file, image_dir):
     :return None:
     '''
     print('There will take pretty long time to finish. Please wait patiently.')
-    _images = convert_from_path(pdf_file, dpi=200, output_folder=image_dir)
+    _images = convert_from_path(pdf_file, dpi=200, fmt='jpg', output_folder=image_dir)
     del _images
     print('Finally, pdf has been converted to images.')    
 
